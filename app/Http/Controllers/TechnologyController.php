@@ -34,12 +34,13 @@ class TechnologyController extends Controller
         $technology = $request->isMethod('put') ? Technology::findOrFail 
         ($request->technology_id) : new Technology;
 
-        $technology->id = $request->input('comment_id');
+        $technology->id = $request->input('technology_id');
         $technology->divide_id = $request->input('divide_id');
-        $technology->name = $request->input('name');        
+        $technology->name = $request->input('name');  
+              
 
-        if($comment->save()) {
-            return new TechnologyResource($comment);
+        if($technology->save()) {
+            return new TechnologyResource($technology);
         }
     }
 
@@ -66,7 +67,7 @@ class TechnologyController extends Controller
      */
     public function destroy($id)
     {
-        // get comment
+        // get technology
         $technology = Technology::findOrFail($id);
 
         if($technology->delete()) {

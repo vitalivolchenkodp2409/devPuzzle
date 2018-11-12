@@ -10,6 +10,10 @@ class AuthenticateController extends Controller
 {
     public function login(Request $request)
     {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
         // grab credentials from the request
         $credentials = $request->only('email', 'password');
 

@@ -17,7 +17,7 @@ class TechnologyController extends Controller
     public function index()
     {
          //get technologies 
-         $technologies = Technology::paginate(5);
+         $technologies = Technology::all();
 
          //return collection of comments as a resource
          return TechnologyResource::collection($technologies);

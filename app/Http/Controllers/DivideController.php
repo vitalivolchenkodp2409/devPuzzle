@@ -18,7 +18,7 @@ class DivideController extends Controller
     public function index()
     {
         //get divides 
-        $divides = Divide::paginate(5);        
+        $divides = Divide::all();        
 
         //return collection of divides as a resource
         return DivideResource::collection($divides);

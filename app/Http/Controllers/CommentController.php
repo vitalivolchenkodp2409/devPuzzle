@@ -17,7 +17,7 @@ class CommentController extends Controller
     public function index()
     {
         //get comments 
-        $comments = Comment::paginate(5);
+        $comments = Comment::all();
 
         //return collection of comments as a resource
         return CommentResource::collection($comments);

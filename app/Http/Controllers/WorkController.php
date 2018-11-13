@@ -13,7 +13,7 @@ class WorkController extends Controller
     public function index()
     {
         //get works 
-        $works = Work::paginate(5);
+        $works = Work::all();
 
         //return collection of works as a resource
         return WorkResource::collection($works);

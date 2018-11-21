@@ -17,7 +17,7 @@ class CreateWorksTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('image')->nullable();
-            $table->string('description');            
+            $table->text('description');            
             $table->timestamps();
         });
     }

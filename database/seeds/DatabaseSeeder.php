@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DividesTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
         $this->call(TechnologiesTableSeeder::class); 
-        $this->call(WorksTableSeeder::class);       
+        $this->call(WorksTableSeeder::class);    
+        $this->call(ContactsTableSeeder::class);
     }
 }

@@ -30,7 +30,7 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {        
         $comment = $request->isMethod('put') ? Comment::findOrFail 
         ($request->comment_id) : new Comment;
 

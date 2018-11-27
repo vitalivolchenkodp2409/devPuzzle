@@ -29,6 +29,9 @@ Route::get('works', 'WorkController@index');
 // List single work 
 Route::get('work/{id}', 'WorkController@show');
 
+// Create new contacts
+Route::post('contacts', 'ContactsController@store');
+
 ////Route::group(['middleware' => 'jwt.auth'], function () {
 
     // get user    
@@ -63,6 +66,13 @@ Route::get('work/{id}', 'WorkController@show');
     Route::put('work', 'WorkController@store');
     // Delete work
     Route::delete('work/{id}', 'WorkController@destroy');
+    
+    // List contacts
+    Route::get('contacts', 'ContactsController@index');
+    // List single contacts 
+    Route::get('contacts/{id}', 'ContactsController@show');
+    // Delete contacts
+    Route::delete('contacts/{id}', 'ContactsController@destroy');
 
 ////});
 

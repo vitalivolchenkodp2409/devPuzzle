@@ -33,14 +33,18 @@ class DivideController extends Controller
     public function store(Request $request)
     {
         $divide = $request->isMethod('put') ? Divide::findOrFail 
-        ($request->divide_id) : new Divide;
+        ($request->id) : new Divide;
 
-        $divide->id = $request->input('divide_id');
+        $divide->id = $request->input('id');
         $divide->name = $request->input('name');
 
         if($request->hasFile('image')) {
+            if($divide->img){                
+                Storage::delete('/public/image/' . $divide->img);                             
+            } 
+
             $image = $request->file('image');
-            $filename = $divide->name . '.' . $image->getClientOriginalExtension();
+            $filename = $divide->name . '-' . time() . '.' . $image->getClientOriginalExtension();
             Storage::putFileAs('public/image', $image, $filename);
 
             $divide->img = $filename;

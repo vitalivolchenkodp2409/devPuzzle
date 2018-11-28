@@ -38,9 +38,9 @@ class ContactsController extends Controller
         ]);
 
         $contacts = $request->isMethod('put') ? contacts::findOrFail 
-        ($request->contacts_id) : new Contacts;
+        ($request->id) : new Contacts;
 
-        $contacts->id = $request->input('contacts_id');
+        $contacts->id = $request->input('id');
         $contacts->name = $request->input('name');
         $contacts->email = $request->input('email');
         $contacts->message = $request->input('message');

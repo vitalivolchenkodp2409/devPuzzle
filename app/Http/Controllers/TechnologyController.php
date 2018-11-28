@@ -32,9 +32,9 @@ class TechnologyController extends Controller
     public function store(Request $request)
     {
         $technology = $request->isMethod('put') ? Technology::findOrFail 
-        ($request->technology_id) : new Technology;
+        ($request->id) : new Technology;
 
-        $technology->id = $request->input('technology_id');
+        $technology->id = $request->input('id');
         $technology->divide_id = $request->input('divide_id');
         $technology->name = $request->input('name');  
               

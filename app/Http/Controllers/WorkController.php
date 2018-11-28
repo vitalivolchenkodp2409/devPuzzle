@@ -29,8 +29,11 @@ class WorkController extends Controller
         $work->description = $request->input('description');   
         
         if($request->hasFile('image')) {
+          if($work->image){                
+            Storage::delete('/public/image/' . $work->image);                             
+          } 
             $image = $request->file('image');
-            $filename = $work->name . '.' . $image->getClientOriginalExtension();
+            $filename = $work->name . '-' . time() . '.'. $image->getClientOriginalExtension();
             Storage::putFileAs('public/image', $image, $filename);
 
             $work->image = $filename;

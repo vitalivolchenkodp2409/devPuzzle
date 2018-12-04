@@ -32,7 +32,7 @@ Route::get('work/{id}', 'WorkController@show');
 // Create new contacts
 Route::post('contacts', 'ContactsController@store');
 
-////Route::group(['middleware' => 'jwt.auth'], function () {
+Route::group(['middleware' => 'jwt.auth'], function () {
 
     // get user    
     Route::get('/user', 'AuthenticateController@user');
@@ -74,6 +74,6 @@ Route::post('contacts', 'ContactsController@store');
     // Delete contacts
     Route::delete('contacts/{id}', 'ContactsController@destroy');
 
-////});
+});
 
 

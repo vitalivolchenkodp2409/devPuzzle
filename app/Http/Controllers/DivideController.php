@@ -90,6 +90,8 @@ class DivideController extends Controller
         // get divide
         $divide = Divide::findOrFail($id);
 
+        Storage::delete('/public/image/' . $divide->img);
+        
         if($divide->delete()) {
         return new DivideResource($divide);
         }

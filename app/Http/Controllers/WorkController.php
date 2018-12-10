@@ -68,6 +68,7 @@ class WorkController extends Controller
         // get work
         $work = Work::findOrFail($id);
 
+        Storage::delete('/public/image/' . $work->image);
         if($work->delete()) {
         return new WorkResource($work);
         }

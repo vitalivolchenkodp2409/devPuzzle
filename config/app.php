@@ -152,7 +152,8 @@ return [
          */
         //Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class, 
-        //Barryvdh\Cors\ServiceProvider::class,      
+        Barryvdh\Cors\ServiceProvider::class,  
+        Intervention\Image\ImageServiceProvider::class,    
 
         /*
          * Application Service Providers...
@@ -214,6 +215,8 @@ return [
 
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Divide;
 use App\Http\Resources\Divide as DivideResource;
-use Illuminate\Support\Facades\Storage;
 use Image;
+use Illuminate\Support\Facades\File;
 
 class DivideController extends Controller
 {
@@ -40,21 +40,17 @@ class DivideController extends Controller
         $divide->name = $request->input('name');
 
         if($request->hasFile('image')) {
-            if($divide->img){                
-                Storage::delete('/public/image/' . $divide->img);                             
+            if($divide->img){                 
+                File::delete(public_path('image/') . $divide->img);                           
             }
 
             $image = $request->file('image');
 
             $filename = $divide->name . '-' . time() . '.' . $image->getClientOriginalExtension();
-            Storage::putFileAs('public/image', $image, $filename);
+                        
+            $image_path = public_path('image/'.$filename);
             
-            $image_path = public_path('storage/image/'.$filename);
-            //dd($image_path);
-            $img = Image::make($image_path)->resize(325, 250, function($constraint) {
-                $constraint->aspectRatio();
-            });
-            $img->save($image_path);
+            Image::make($image)->resize(325, 250)->save($image_path);            
 
             $divide->img = $filename;
         }
@@ -89,8 +85,8 @@ class DivideController extends Controller
     {
         // get divide
         $divide = Divide::findOrFail($id);
-
-        Storage::delete('/public/image/' . $divide->img);
+        
+        File::delete(public_path('image/') . $divide->img);
         
         if($divide->delete()) {
         return new DivideResource($divide);

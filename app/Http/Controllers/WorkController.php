@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Work;
 use App\Http\Resources\Work as WorkResource;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Image;
 
 class WorkController extends Controller
@@ -31,20 +31,16 @@ class WorkController extends Controller
         
         if($request->hasFile('image')) {
           if($work->image){                
-            Storage::delete('/public/image/' . $work->image);                             
+            File::delete(public_path('image/') . $work->image);                             
           } 
 
         $image = $request->file('image');
 
         $filename = $work->name . '-' . time() . '.'. $image->getClientOriginalExtension();
-        Storage::putFileAs('public/image', $image, $filename);
-
-        $image_path = public_path('storage/image/'.$filename);
-        //dd($image_path);
-        $img = Image::make($image_path)->resize(325, 250, function($constraint) {
-            $constraint->aspectRatio();
-        });
-        $img->save($image_path);
+        
+        $image_path = public_path('image/'.$filename);
+        
+        Image::make($image)->resize(325, 250)->save($image_path);
 
         $work->image = $filename;
         }
@@ -67,8 +63,9 @@ class WorkController extends Controller
     {
         // get work
         $work = Work::findOrFail($id);
+        
+        File::delete(public_path('image/') . $work->image);
 
-        Storage::delete('/public/image/' . $work->image);
         if($work->delete()) {
         return new WorkResource($work);
         }

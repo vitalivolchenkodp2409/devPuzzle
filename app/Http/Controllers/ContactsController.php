@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Contacts;
 use App\Http\Resources\Contacts as ContactsResource;
-use Mail;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMailable;
 
 class ContactsController extends Controller
 {
@@ -47,13 +49,11 @@ class ContactsController extends Controller
         $contacts->message = $request->input('message');
 
         $data = ['name' => $request->input('name'), 'email' => $request->input('email'), 
-        'message' => $request->input('message')];
+        'message' => $request->input('message')];        
 
-        Mail::send('emails.mail', $data, function($message) {
-            $message->to('temp.socials.dp@gmail.com', 'Dev Puzzle')
-                    ->subject('Contacts from devPuzzle');
-            $message->from('temp.socials.dp@gmail.com','Dev Puzzle');
-        });        
+                        
+        Mail::to('tarasenkoa.dp@gmail.com')->send(new SendMailable($data));
+        Mail::to('temp.socials.dp@gmail.com')->send(new SendMailable($data));
 
         if($contacts->save()) {
             return new ContactsResource($contacts);

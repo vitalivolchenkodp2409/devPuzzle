@@ -7,9 +7,9 @@
   <title>Contacts from devPuzzle</title>
 </head>
 <body>      
-  <h1>You have mail from:</h1>
-  <h1>{{ $name }}</h1>
-  <h2>{{ $email }}</h2>
-  <p>{{ $message }}</p>  
+  <h2>You have mail from:</h2>
+  <h3>Name: {{ $data['name'] }}</h3>
+  <h3>Email: {{ $data['email'] }}</h3>
+  <h3>Message: </h3><p style="font-size: 15px;">{{ $data['message'] }}</p>  
 </body>
 </html>
